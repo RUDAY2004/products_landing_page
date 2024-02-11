@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Font Awesome CDN link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel="stylesheet" href="./style.css">
+    <!-- Montserrat Google Font link -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+    <title>Product Landing Page</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            color: white;
+            background: url(logo11.jpg) no-repeat 0 0;
+            background-size: cover;
+            background-position: center;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            height: 90px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 5%; /* Adjusted padding for responsiveness */
+            font-size: 1.2em;
+            z-index: 2;
+        }
+
+        .logo {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+            font-size: 1.4em;
+        }
+
+        .logo img {
+            width: 40px;
+            margin-right: 8px;
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+        }
+
+        nav ul li {
+            list-style: none;
+            margin: 0 23px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+        }
+
+        nav ul li a:hover {
+            color: rgb(104, 104, 155);
+            font-size: 1.02rem;
+        }
+
+        .menu-icon {
+            display: none;
+            font-size: 1.5em;
+            cursor: pointer;
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 0 5%;  
+            }
+
+            .logo {
+                font-size: 1.2em;
+            }
+
+            .logo img {
+                width: 30px;
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+                position: absolute;
+                top: 90px;
+                left: 0;
+                right: 0;
+                background-color: rgba(0, 0, 0, 0.8);
+                z-index: 1;
+                display: none;
+            }
+
+            nav ul.active {
+                display: flex;
+            }
+
+            nav ul li {
+                margin: 15px 0;
+            }
+
+            .menu-icon {
+                display: block;
+            }
+        }
+
+        .main {
+            padding-top: 90px;
+            position: relative;
+            flex: 1;
+            display: flex;
+            flex-wrap: wrap;  
+        }
+
+        .left {
+            flex: 1;
+            padding: 0 5%;
+            max-width: 50%;
+        }
+
+        .title {
+            font-size: 1.8em;
+            letter-spacing: 0.5px;
+            margin: 38px auto;
+        }
+
+        .title strong {
+            font-size: 0.9em;
+            display: block;
+            line-height: 50px;
+            color: whitesmoke;
+        }
+
+        button.cta {
+            border: none;
+            outline: none;
+            background-color: #fff;
+            color: black;
+            padding: 18px 32px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 30px;
+            margin-top: 20px; 
+        }
+
+        button.cta:hover {
+            background-color: #fdf3f8;
+        }
+
+        button span {
+            text-transform: uppercase;
+            font-size: 1.3em;
+            letter-spacing: 3px;
+            font-weight: bold;
+        }
+
+        button.cta i {
+            font-size: 1.7em;
+            margin-left: 16px;
+        }
+
+        .right {
+            padding: 40px 0 0 5%;  
+            max-width: 50%;  
+        }
+
+        .right img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .colors {
+            display: flex;
+            border-top: 3px dotted #fff;
+        }
+
+        .colors .item {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-width: 120px;
+            min-height: 180px;
+            padding-top: 40px;
+        }
+
+        .item img {
+            position: relative;
+            width: 60px;
+            cursor: pointer;
+            transition: width 0.5s;
+        }
+
+        .item img:hover {
+            width: 70px;
+        }
+
+        .item .color-selector {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            background-color: black;
+            width: 16px;
+            height: 16px;
+            transform: translate(-50%, -50%);
+            border: 2px solid #fff;
+            border-radius: 50%;
+        }
+
+        .item.silver .color-selector {
+            background-color: silver;
+        }
+
+        .item.gold .color-selector {
+            background-color: rgb(188, 181, 140);
+        }
+
+        .item:first-child {
+            transform: translateX(-50%);
+        }
+
+        .item:last-child {
+            transform: translateX(50%);
+        }
+
+        .item.active img {
+            width: 130px;
+        }
+
+        .item.active .color-selector {
+            width: 28px;
+            height: 28px;
+        }
+
+        .item.active {
+            min-width: 220px;
+        }
+
+        .additional-info {
+            background-color: #595f96;
+            border-radius: 16px;
+            position: absolute;
+            left: 50%;
+            width: 100%;
+            text-align: center;
+            padding: 8px 16px;
+            line-height: 28px;
+            font-size: 1.0em;
+            letter-spacing: 0.5px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <img src="apple.png" alt="shoes logo">
+            Apple Series 8 Watch
+        </div>
+        <div class="menu-icon"><i class="fas fa-bars"></i></div>
+        <nav>
+            <ul class="menu-list">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="overview.html">Overview</a></li>
+                <li><a href="Feature.html">Feature</a></li>
+                <li><a href="prize.html">Prize</a></li>
+                <li><a href="/">Sign up</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="main">
+
+        <section class="left">
+            <p class="title">Apple Series 8 <strong>Apple Watch Series 8 delivers best-in-class health features, including an innovative temperature sensor that enables advanced features for women’s health, and Crash Detection for severe car crashes. The redesigned Apple Watch SE delivers the core Apple Watch experience at a new starting price.</strong></p>
+        </section>
+
+        <section class="right">
+            <img src="series 8 watch.png" alt="Shoes">
+        </section>
+
+    </section>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const menuIcon = document.querySelector('.menu-icon');
+            const navList = document.querySelector('.menu-list');
+
+            menuIcon.addEventListener('click', function () {
+                navList.classList.toggle('active');
+            });
+        });
+    </script>
+</body>
+
+</html>
